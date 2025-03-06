@@ -95,3 +95,36 @@ c.STATUS_CONSULTA
 FROM consulta c
 INNER JOIN paciente p ON p.id_paciente = p.id.paciente
 INNER JOIN pessoa p2 ON p.id_pessoa = m.id_pessoa
+
+------------------------------------------------------------------------------------------
+ /*Outros INNER JOIN*/
+
+SELECT 
+p.NOME ,
+p.TELEFONE ,
+m.CRM,
+m.ESPECIALIDADE,
+c.STATUS_CONSULTA,
+c.AGENDAMENTO
+FROM consulta c
+INNER JOIN medico m ON m.id_medico = c.id_medico 
+INNER JOIN pessoa p ON p.id_pessoa = m.id_pessoa
+
+----------------------------------------------------------------------------------------
+
+
+SELECT 
+pm.NOME AS Nome_medico,
+pp.NOME AS Nome_paciente,
+m.CRM,
+m.ESPECIALIDADE,
+c.STATUS_CONSULTA,
+c.AGENDAMENTO,
+pm.TELEFONE 
+FROM consulta c
+INNER JOIN medico m ON m.id_medico = c.id_medico 
+INNER JOIN pessoa pm ON m.id_pessoa = pm.id_pessoa
+INNER JOIN paciente pc ON pc.id_paciente = c.id_paciente
+INNER JOIN pessoa pp ON pc.id_pessoa = pp.id_pessoa;
+
+
