@@ -144,3 +144,32 @@ VALUES('Em análise',1,9),
 ('Ajustando detalhes',2,10),
 ('Em andamento',3,11),
 ('Finalizado',4,12);
+
+#-------------------------------------------------------------------------
+ #INNER JOIN 1 :
+ 
+ #Valor obra, data inicio, data fim, status_obra, area de atuacao, nome da empresa
+SELECT
+p.NOME,  
+o.VALOR,
+o.DATA_INICIO,
+o.DATA_FIM,
+o.STATUS_OBRA,
+e.AREA_ATUACAO
+ FROM obra o 
+INNER JOIN empreiteira e ON e.id_empreiteira = o.id_empreiteira
+INNER JOIN pessoa p on p.id_pessoa = e.id_pessoa
+WHERE id_obra = 4;
+
+#-----------------------------------------------------------------------------------
+#INNER JOIN 2 :
+CREATE VIEW relatorio_projeto AS 
+SELECT
+p.NOME,
+pj.TIPO_PROJETO,
+pj.NOME_PROJETO,
+pj.VALOR,
+c.FUNCAO
+ FROM projeto pj
+ INNER JOIN colaborador c ON c.id_colaborador = pj.id_colaborador
+ INNER JOIN pessoa p ON p.id_pessoa = c.id_pessoa
