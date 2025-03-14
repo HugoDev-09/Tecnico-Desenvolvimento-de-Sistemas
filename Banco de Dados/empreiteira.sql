@@ -173,3 +173,38 @@ c.FUNCAO
  FROM projeto pj
  INNER JOIN colaborador c ON c.id_colaborador = pj.id_colaborador
  INNER JOIN pessoa p ON p.id_pessoa = c.id_pessoa
+
+#----------------------------------------------------------------------------------
+ 
+ UPDATE pessoa SET nome = 'Jose Maria' WHERE id_pessoa = 2;
+ SELECT * FROM pessoa;
+ 
+ #---------------------------------------------------------------------------------
+ #LIKE 
+ SELECT * FROM colaborador WHERE FUNCAO LIKE '%Arquiteto%';
+ SELECT * FROM projeto WHERE NOME_PROJETO LIKE '%In%';
+ 
+ #--------------------------------------------------------------------------------
+ SELECT * FROM canteiro_obra;
+ SELECT * FROM projeto;
+ SELECT * FROM obra;
+ SELECT * FROM empreiteira;
+ SELECT * FROM colaborador;
+ SELECT * FROM pessoa;
+ #Nome da Empresa Responsável,
+
+ SELECT 
+p.NOME AS Nome_colaboradores,
+c.FUNCAO AS Função_colaboradores,
+o.DATA_INICIO ,
+o.PREVISAO,
+o.VALOR AS Valor_obra,
+pp.NOME AS Nome_Empresa_Responsáveis
+
+ 
+FROM canteiro_obra co ##id_colaborador, id_obra
+INNER JOIN colaborador c ON c.id_colaborador = co.id_colaborador ## id_pessoa
+INNER JOIN pessoa p ON p.id_pessoa = c.id_pessoa #---
+INNER JOIN obra o ON o.id_obra = co.id_obra  #id_empreiteira
+INNER JOIN empreiteira e ON e.id_empreiteira = o.id_empreiteira
+INNER JOIN pessoa pp ON pp.id_pessoa = e.id_pessoa
