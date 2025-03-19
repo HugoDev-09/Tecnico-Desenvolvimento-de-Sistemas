@@ -113,3 +113,41 @@ VALUES(17,'Monteiro Lobato', 'Pato de Minas', 'MG', '65789-976','A',1);
 
 INSERT INTO itens_venda(DESCONTO, ACRESCIMO,QUANTIDADE,PRECO,VALOR_TOTAL,CANCELADA,id_produto,id_venda)
 VALUES(10,0,25,100,90,'N',1,1);
+
+*---------------------------------------------------------------------------------------
+
+
+SELECT * FROM pessoa;
+SELECT * FROM vendedor;
+SELECT * FROM cliente;
+SELECT * FROM pagamento;
+SELECT * FROM venda;
+SELECT * FROM produto;
+SELECT * FROM endereco;
+SELECT * FROM itens_venda;
+
+INSERT INTO venda( VALOR_TOTAL, DESCONTO,numero_pedido,CANCELADA,id_cliente,id_vendedor,id_pagamento)
+VALUES(0,0,0,'I',2,1,1);
+
+INSERT INTO produto(DENOMINACAO,QTD_ESTOQUE,PRECO,SITUACAO)
+VALUES('Creatina' , 50,54.69,'A'),
+('Mochila',25,70.99,'A'),
+('Estojo',1,10,'E'),
+('Notebook',5,1499.99,'A'),
+('Mentos',12,2.00,'A'),
+('Teclado',0,'69.99','E');
+
+INSERT INTO itens_venda(DESCONTO, ACRESCIMO,QUANTIDADE,id_produto,id_venda)
+VALUES(0,0,2,3);
+
+
+#-------------------------------------------------------------------------------------------------------
+
+DELIMITER // 
+CREATE TRIGGER preco
+AFTER INSERT
+ON itens_venda FOR EACH ROW
+BEGIN
+UPDATE itens_venda SET NEW.preco = (SELECT preco FROM produto WHERE id_produto = NEW.id_produto ) WHERE NEW.id_venda = NEW.id_venda;
+END
+//
