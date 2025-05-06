@@ -79,3 +79,31 @@ FOREIGN KEY (id_ficha_cadastro) REFERENCES ficha_cadastro(id_ficha_cadastro),
 FOREIGN KEY (id_pagamento) REFERENCES pagamento(id_pagamento) 
 );
 
+CREATE TABLE estoque(
+id_estoque INT PRIMARY KEY AUTO_INCREMENT,
+produto VARCHAR(50) ,
+quantidade INT ,
+valor_produto DOUBLE ,
+recebimento_produto DATE ,
+validade_produto INT , 
+reposicao VARCHAR(30) ,
+situacao VARCHAR(30)
+);
+
+CREATE TABLE procedimento(
+id_procedimento INT PRIMARY KEY AUTO_INCREMENT,
+id_entrada_saida INT NOT NULL,
+id_estoque INT NOT NULL,
+FOREIGN KEY (id_entrada_saida) REFERENCES entrada_saida(id_entrada_saida),
+FOREIGN KEY (id_estoque) REFERENCES estoque(id_estoque)
+);
+
+INSERT INTO pessoa(nome,idade,cpf,telefone,sexo,situacao,endereco)
+VALUES('Hugo Ruan',18,'xx','61998379048','Masculino','A','xx');
+
+INSERT INTO login(usuario,senha,tipo_usuario,situacao,id_pessoa)
+VALUES('admin',UPPER(MD5('1516')),'Administrador','A',1);
+
+
+SELECT * FROM login;
+SELECT * FROM pessoa;
